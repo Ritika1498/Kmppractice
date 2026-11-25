@@ -1,0 +1,35 @@
+CREATE TABLE User (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL
+);
+
+-- READ: Get all users
+selectAllUsers:
+SELECT *
+FROM User;
+
+-- READ: Get one user by ID
+selectUserById:SELECT *
+FROM User
+WHERE id = ?;
+
+-- CREATE: Insert user
+insertUser:
+INSERT INTO User(id, name, email)
+VALUES (?, ?, ?);
+
+-- UPDATE: Update user
+updateUser:
+UPDATE User
+SET name = ?, email = ?
+WHERE id = ?;
+
+-- DELETE: Delete one user
+deleteUser:
+DELETE FROM User
+WHERE id = ?;
+
+-- DELETE: Delete all users
+deleteAllUsers:
+DELETE FROM User;

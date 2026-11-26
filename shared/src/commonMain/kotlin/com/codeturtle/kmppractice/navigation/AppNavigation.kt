@@ -1,15 +1,14 @@
 package com.codeturtle.kmppractice.navigation
 
-
-/*import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-
-import com.example.myapp.features.login.LoginScreen
-import com.example.myapp.features.home.HomeScreen
-import com.example.myapp.features.users.UserDetailsScreen
+import androidx.navigation.navArgument
+import androidx.savedstate.read
+import com.codeturtle.kmppractice.presentation.UserDetailsScreen
+import com.codeturtle.kmppractice.presentation.UserScreen
 
 @Composable
 fun AppNavigation() {
@@ -18,51 +17,36 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Login
+        startDestination = Screen.UserList.route
     ) {
 
-        // Login destination
-        composable<Screen.Login> {
+        composable(Screen.UserList.route) {
 
-            LoginScreen(
-                onLoginClick = {
-
-                    navController.navigate(Screen.Home) {
-                        popUpTo<Screen.Login> {
-                            inclusive = true
-                        }
-                    }
-                }
-            )
-        }
-
-        // Home destination
-        composable<Screen.Home> {
-
-            HomeScreen(
+            UserScreen(
                 onUserClick = { userId ->
-
                     navController.navigate(
-                        Screen.UserDetails(userId)
+                        Screen.UserDetails.createRoute(userId)
                     )
                 }
             )
         }
 
-        // User details destination
-        composable<Screen.UserDetails> { backStackEntry ->
-
-            val route = backStackEntry.toRoute<Screen.UserDetails>()
-
-            UserDetailsScreen(
-                userId = route.userId,
-                onBackClick = {
-                    navController.popBackStack()
+        composable(
+            route = Screen.UserDetails.route,
+            arguments = listOf(
+                navArgument("userId") {
+                    type = NavType.IntType
                 }
             )
+        ) { backStackEntry ->
+
+            val userId = requireNotNull(
+                backStackEntry.arguments?.read { getInt("userId") }
+            ) {
+                "Missing or invalid required navigation argument: userId"
+            }
+
+            UserDetailsScreen(userId = userId)
         }
     }
-}*/
-
-
-
+}

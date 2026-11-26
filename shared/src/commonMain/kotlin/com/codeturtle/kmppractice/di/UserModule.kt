@@ -19,12 +19,14 @@ val userModule = module {
     single<UserRepository> {
         UserRepositoryImpl(
             get(),
-            localDataSource = get()
+            database = get()
         )
     }
 
     factory {
-        GetUsersUseCase()
+        GetUsersUseCase(
+            repository = get()
+        )
     }
 
     viewModel {

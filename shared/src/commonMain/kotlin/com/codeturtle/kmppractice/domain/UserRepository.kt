@@ -1,6 +1,9 @@
 package com.codeturtle.kmppractice.domain
 
+import kotlinx.coroutines.flow.Flow
+
 interface UserRepository {
-    suspend fun getUsers(): List<User>
-    suspend fun refreshUsers(): List<User>
+    fun getUsers(): Flow<List<User>>
+
+    suspend fun refreshUsers()
 }

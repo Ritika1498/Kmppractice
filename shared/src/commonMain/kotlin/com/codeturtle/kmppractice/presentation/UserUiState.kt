@@ -3,14 +3,9 @@ package com.codeturtle.kmppractice.presentation
 import com.codeturtle.kmppractice.domain.GetUsersUseCase
 import com.codeturtle.kmppractice.domain.User
 
-sealed interface UserUiState {
-    data object Loading : UserUiState
-
-    data class Success(
-        val users: List<User>
-    ) : UserUiState
-
-    data class Error(
-        val message: String
-    ) : UserUiState
-}
+data class UserUiState(
+    val users: List<User> = emptyList(),
+    val isLoading: Boolean = true,
+    val isRefreshing: Boolean = false,
+    val error: String? = null
+)

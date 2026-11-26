@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.sqldelight)
 }
 
@@ -69,7 +70,7 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.ktor.client.logging)
 
-         //   implementation(libs.androidx.navigation.compose)
+            implementation(libs.androidx.navigation.compose)
 
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.coroutines.extensions)

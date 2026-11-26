@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.codeturtle.kmppractice.di.sharedModules
+import com.codeturtle.kmppractice.navigation.AppNavigation
 import com.codeturtle.kmppractice.presentation.UserScreen
 import com.codeturtle.kmppractice.presentation.UserViewModel
 import org.jetbrains.compose.resources.painterResource
@@ -39,36 +40,7 @@ fun App() {
 @Composable
 fun AppContent() {
     MaterialTheme {
-        UserScreen()
+        AppNavigation()
     }
 }
-@Composable
-fun showScreen(viewModel: UserViewModel)
-{
-    val platform = Platform()
-    MaterialTheme {
-        var showContent by remember { mutableStateOf(false) }
-        Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primaryContainer)
-                .safeContentPadding()
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Button(onClick = { showContent = !showContent }) {
-                Text("Click me!")
-                UserScreen(viewModel)
-            }
-            AnimatedVisibility(showContent) {
-                val greeting = remember {platform.getPlatformName()}
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
-                }
-            }
-        }
-    }
-}
+
